@@ -41,26 +41,31 @@ namespace CSAMEval
 
             pbxCSAMImage.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(src);
 
-            Mat src8UC1 = new Mat();
+            // Not needed if we read as grayscale to start with. 
+            //Mat src8UC1 = new Mat();
+            //src.ConvertTo(src8UC1, MatType.CV_8UC1);
 
-            src.ConvertTo(src8UC1, MatType.CV_8UC1);
-
+            // I'm not sure why we do the gauss - It seems like everyone does it, it's cheap, so we do it. ~Ed
             LogEvent("gauss", showMessageBoxes);
             Mat gauss = new Mat();
-            Cv2.GaussianBlur(src8UC1, gauss, new OpenCvSharp.Size(3, 3), 2, 2);
-
+            Cv2.GaussianBlur(src, gauss, new OpenCvSharp.Size(3, 3), 2, 2);
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(gauss);
 
-
+            // An attempt to get the contrast across the image to be somewhat uniform. 
             LogEvent("clahe", showMessageBoxes);
             CLAHE claheFilter = Cv2.CreateCLAHE(4, new OpenCvSharp.Size(10, 10));
-
             Mat clahe = new Mat();
-
             claheFilter.Apply(gauss, clahe);
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(clahe);
 
-
+            // Grab a template from some middle part of the image. Eventually, the size and location of this 
+            // template will be specified. It is very possible we'll have to grab multiple templates, as the 
+            // location of the template may impact the accuracy of the rotation.
+            // e.g. - if the template is an image of a damaged device (which may happen at any location), the calculated 
+            // rotation may be wrong. Testing is required. 
+            // The locations where the template matches will create an image with lines that are offset from 0/90 degrees.
+            // This is because we can assume that the devices are orthogonal to one another, even if the image itself is 
+            // offset rotationally. 
             Rect r1 = new Rect(new OpenCvSharp.Point(1000, 1000), new OpenCvSharp.Size(500, 300));
             var roi = new Mat(clahe, r1);
             Mat template = new Mat(new OpenCvSharp.Size(500, 300), MatType.CV_8UC1);
@@ -92,7 +97,7 @@ namespace CSAMEval
             Cv2.Threshold(converted, otsu, 100, 255, ThresholdTypes.Binary);
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(otsu);
 
-
+            // It would be nice if the output of this erode was more sparse. Seems to work as is. I'm worried about reliability across multiple image contrast levels.
             LogEvent("erode", showMessageBoxes);
             Mat erode = new Mat();
             Cv2.Erode(otsu, erode, new Mat());
@@ -103,7 +108,7 @@ namespace CSAMEval
 
             LineSegmentPoint[] segHoughP = Cv2.HoughLinesP(erode, 1, Math.PI / 1800, 10, 500, 100);
 
-            Mat imageOutP = src8UC1.EmptyClone();
+            Mat imageOutP = src.EmptyClone();
 
             List<double> angles180 = new List<double>();
 
@@ -137,7 +142,7 @@ namespace CSAMEval
 
             Mat rotated = new Mat();
 
-            rotateImage(rotationAngle, 1, src8UC1, rotated);
+            rotateImage(rotationAngle, 1, src, rotated);
 
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(rotated);
 
