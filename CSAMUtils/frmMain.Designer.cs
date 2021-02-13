@@ -34,8 +34,8 @@ namespace CSAMEval
             this.pbxProcessed = new Cyotek.Windows.Forms.ImageBox();
             this.pbxCSAMImage = new Cyotek.Windows.Forms.ImageBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbxShowMessageboxes = new System.Windows.Forms.CheckBox();
             this.btnAutoRotateImage = new System.Windows.Forms.Button();
-            this.btnRun = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -89,34 +89,33 @@ namespace CSAMEval
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbxShowMessageboxes);
             this.panel1.Controls.Add(this.btnAutoRotateImage);
-            this.panel1.Controls.Add(this.btnRun);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(762, 71);
             this.panel1.TabIndex = 6;
             // 
+            // cbxShowMessageboxes
+            // 
+            this.cbxShowMessageboxes.AutoSize = true;
+            this.cbxShowMessageboxes.Location = new System.Drawing.Point(526, 15);
+            this.cbxShowMessageboxes.Name = "cbxShowMessageboxes";
+            this.cbxShowMessageboxes.Size = new System.Drawing.Size(249, 29);
+            this.cbxShowMessageboxes.TabIndex = 6;
+            this.cbxShowMessageboxes.Text = "Show Messageboxes";
+            this.cbxShowMessageboxes.UseVisualStyleBackColor = true;
+            // 
             // btnAutoRotateImage
             // 
-            this.btnAutoRotateImage.Location = new System.Drawing.Point(233, 11);
+            this.btnAutoRotateImage.Location = new System.Drawing.Point(233, 3);
             this.btnAutoRotateImage.Margin = new System.Windows.Forms.Padding(6);
             this.btnAutoRotateImage.Name = "btnAutoRotateImage";
-            this.btnAutoRotateImage.Size = new System.Drawing.Size(261, 35);
+            this.btnAutoRotateImage.Size = new System.Drawing.Size(261, 50);
             this.btnAutoRotateImage.TabIndex = 5;
             this.btnAutoRotateImage.Text = "AutoRotateImage";
             this.btnAutoRotateImage.UseVisualStyleBackColor = true;
-            this.btnAutoRotateImage.Click += new System.EventHandler(this.btnTemplateMatch_Click);
-            // 
-            // btnRun
-            // 
-            this.btnRun.Location = new System.Drawing.Point(45, 6);
-            this.btnRun.Margin = new System.Windows.Forms.Padding(6);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(150, 44);
-            this.btnRun.TabIndex = 2;
-            this.btnRun.Text = "Run";
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            this.btnAutoRotateImage.Click += new System.EventHandler(this.btnAutoRotateImage_Click);
             // 
             // frmMain
             // 
@@ -131,6 +130,7 @@ namespace CSAMEval
             this.Text = "CSAMEval";
             this.tlpMain.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,11 +140,11 @@ namespace CSAMEval
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TableLayoutPanel tlpMain;
-        private System.Windows.Forms.Button btnRun;
         private Cyotek.Windows.Forms.ImageBox pbxProcessed;
         private Cyotek.Windows.Forms.ImageBox pbxCSAMImage;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAutoRotateImage;
+        private System.Windows.Forms.CheckBox cbxShowMessageboxes;
     }
 }
 

@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7588469F-F891-4F7E-BD2A-E7C35B1C6072}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CSAMEval</RootNamespace>
-    <AssemblyName>CSAMEval</AssemblyName>
+    <RootNamespace>CSAMUtils</RootNamespace>
+    <AssemblyName>CSAMUtils</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -101,6 +101,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

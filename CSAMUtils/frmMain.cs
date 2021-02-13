@@ -21,184 +21,38 @@ namespace CSAMEval
             InitializeComponent();
         }
 
-        private void btnRun_Click(object sender, EventArgs e)
+
+        private void LogEvent(string sMessage, bool showMessageBoxes)
         {
 
-            ProcessFile(@"..\..\..\ExampleFiles\TH-01_AG4.jpg");
-        }
-
-
-        private async void ProcessFile(string fileFullPath)
-        {
-            try
+            if (showMessageBoxes)
             {
-                Mat src = new Mat(fileFullPath, ImreadModes.Grayscale);
-
-                pbxCSAMImage.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(src);
-
-                Mat dst = new Mat();
-
-                src.ConvertTo(dst, MatType.CV_8UC1);
-
-
-                MessageBox.Show("gauss");
-
-                Mat gauss = new Mat();
-                Cv2.GaussianBlur(dst, gauss, new OpenCvSharp.Size(3, 3), 2, 2);
-
-                pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(gauss);
-
-
-                MessageBox.Show("clahe");
-
-                CLAHE claheFilter = Cv2.CreateCLAHE(4, new OpenCvSharp.Size(10, 10));
-
-                Mat clahe = new Mat();
-
-                claheFilter.Apply(gauss, clahe);
-                pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(clahe);
-
-
-
-                MessageBox.Show("otsu");
-
-                Mat otsu = new Mat();
-                Cv2.Threshold(clahe, otsu, 100, 255, ThresholdTypes.Otsu);
-                pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(otsu);
-
-
-                //MessageBox.Show("erode");
-                //Mat erode = new Mat();
-                //Cv2.Erode(otsu, erode, new Mat());
-                //pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(erode);
-
-                //MessageBox.Show("Next step");
-                //Mat inv = new Mat();
-                //Cv2.Threshold(otsu, inv, 100, 255, ThresholdTypes.BinaryInv );
-                //pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(inv);
-                //MessageBox.Show("Next step");
-
-                //Cv2.Canny(dst, dst, 50, 200);
-                //pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(dst);
-
-                MessageBox.Show("sobelx");
-                Mat sobelX = new Mat();
-
-                Cv2.Sobel(otsu, sobelX, MatType.CV_8UC1, 1, 0, 5);
-
-                pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(sobelX);
-
-                //MessageBox.Show("Next step");
-
-
-                //Mat sobelY = new Mat();
-
-                //Cv2.Sobel(clahe, sobelY, MatType.CV_8UC1, 0, 1, 9);
-                //pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(sobelY);
-
-
-                //MessageBox.Show("Next step");
-
-                //Mat sobelXY = new Mat();
-
-                //Cv2.Sobel(clahe, sobelXY, MatType.CV_8UC1, 1, 1, 9);
-                //pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(sobelXY);
-
-
-                //MessageBox.Show("Next step");
-
-                //               Mat laplacian = new Mat();
-
-                //Cv2.Laplacian(dst, laplacian, MatType.CV_8UC1);
-                //pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(laplacian);
-
-                ////                img_sobelx = cv2.Sobel(img_gaussian, cv2.CV_8U, 1, 0, ksize = 5)
-                ////img_sobely = cv2.Sobel(img_gaussian, cv2.CV_8U, 0, 1, ksize = 5)
-
-                MessageBox.Show("canny");
-                Mat canny = new Mat();
-
-                Cv2.Canny(otsu, canny, 95, 100);
-                pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(canny);
-
-                MessageBox.Show("hough");
-
-                LineSegmentPoint[] segHoughP = Cv2.HoughLinesP(sobelX, 1, Math.PI / 1800, 10, 50, 10);
-
-                Mat imageOutP = dst.EmptyClone();
-
-                List<double> angles = new List<double>();
-
-                foreach (LineSegmentPoint s in segHoughP)
-                {
-                    //                    if (s.Length() < 200)
-                    //                    {
-
-                    var radian = Math.Atan2((s.P1.Y - s.P2.Y), (s.P1.X - s.P2.X));
-                    var angle = (radian * (180 / Math.PI) + 360) % 360;
-
-                    if (angle > 180)
-                    {
-                        angle = angle - 180;
-                    }
-
-                    if (angle > 80 && angle < 100)
-                    {
-                        imageOutP.Line(s.P1, s.P2, Scalar.White, 1, LineTypes.AntiAlias, 0);
-                        angles.Add(angle);
-                    }
-
-                    //                  }
-                }
-
-                double medianAngle = angles.Mean();
-
-
-                pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(imageOutP);
-
-                //using (new Window("Edges", edges))
-                //using (new Window("HoughLinesP", imageOutP))
-                //{
-                //    Window.WaitKey(0);
-                //}
-
-
-                //CvSeq SeqLines;
-                //SeqLines = edgeImage.HoughLines2(storage, HoughLinesMethod.Probabilistic, 1, Math.PI / 180, 80, 30, 10);
-
+                MessageBox.Show(sMessage);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
 
         }
 
 
-        private void TemplateMatch(string fileFullPath)
+        private void RotateImage(string fileFolderPath, string fileName, bool showMessageBoxes)
         {
 
 
-            Mat src = new Mat(fileFullPath, ImreadModes.Grayscale);
+            Mat src = new Mat(fileFolderPath + fileName, ImreadModes.Grayscale);
 
             pbxCSAMImage.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(src);
 
-            Mat dst = new Mat();
+            Mat src8UC1 = new Mat();
 
-            src.ConvertTo(dst, MatType.CV_8UC1);
+            src.ConvertTo(src8UC1, MatType.CV_8UC1);
 
-
-            MessageBox.Show("gauss");
-
+            LogEvent("gauss", showMessageBoxes);
             Mat gauss = new Mat();
-            Cv2.GaussianBlur(dst, gauss, new OpenCvSharp.Size(3, 3), 2, 2);
+            Cv2.GaussianBlur(src8UC1, gauss, new OpenCvSharp.Size(3, 3), 2, 2);
 
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(gauss);
 
 
-            MessageBox.Show("clahe");
-
+            LogEvent("clahe", showMessageBoxes);
             CLAHE claheFilter = Cv2.CreateCLAHE(4, new OpenCvSharp.Size(10, 10));
 
             Mat clahe = new Mat();
@@ -222,45 +76,39 @@ namespace CSAMEval
             Mat converted = new Mat();
 
             // This doesn't really seem to normalize, as I don't see any values >250 in the output. 
-            converted = templateMatch.Normalize(0, 255, NormTypes.MinMax  );
+            converted = templateMatch.Normalize(0, 255, NormTypes.MinMax);
 
             converted.ConvertTo(converted, MatType.CV_8UC1);
 
 
-          //  Mat grayscaleMat = Mat.FromImageData(templateMatch, ImreadModes.Grayscale );
 
-            //            Cv2.ImShow("Matches", templateMatch);
-
-            
-            
+            LogEvent("template match", showMessageBoxes);
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(converted);
 
 
-            MessageBox.Show("otsu");
 
+            LogEvent("otsu", showMessageBoxes);
             Mat otsu = new Mat();
-            Cv2.Threshold(converted, otsu, 100, 255, ThresholdTypes.Binary  );
+            Cv2.Threshold(converted, otsu, 100, 255, ThresholdTypes.Binary);
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(otsu);
 
 
-            MessageBox.Show("erode");
+            LogEvent("erode", showMessageBoxes);
             Mat erode = new Mat();
             Cv2.Erode(otsu, erode, new Mat());
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(erode);
 
 
-            MessageBox.Show("hough");
+            LogEvent("hough", showMessageBoxes);
 
             LineSegmentPoint[] segHoughP = Cv2.HoughLinesP(erode, 1, Math.PI / 1800, 10, 500, 100);
 
-            Mat imageOutP = dst.EmptyClone();
+            Mat imageOutP = src8UC1.EmptyClone();
 
-            List<double> angles = new List<double>();
+            List<double> angles180 = new List<double>();
 
             foreach (LineSegmentPoint s in segHoughP)
             {
-                //                    if (s.Length() < 200)
-                //                    {
 
                 var radian = Math.Atan2((s.P1.Y - s.P2.Y), (s.P1.X - s.P2.X));
                 var angle = (radian * (180 / Math.PI) + 360) % 360;
@@ -271,30 +119,49 @@ namespace CSAMEval
                     angle = angle - 180;
                 }
 
-                //if (angle > 80 && angle < 100)
-                //{
+                if (angle > 175 && angle < 185)
+                {
                     imageOutP.Line(s.P1, s.P2, Scalar.White, 1, LineTypes.AntiAlias, 0);
-                    angles.Add(angle);
-                //}
+                    angles180.Add(angle);
+                }
 
-                //                  }
             }
 
-            double medianAngle = angles.Mean();
+            double meanAngle180 = angles180.Mean();
+
+            double rotationAngle = meanAngle180 - 180;
+
 
             pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(imageOutP);
 
 
+            Mat rotated = new Mat();
+
+            rotateImage(rotationAngle, 1, src8UC1, rotated);
+
+            pbxProcessed.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(rotated);
+
+            string rotatedFilename = string.Format("Rotated_{0}deg_{1}.jpg", rotationAngle.ToString("0.00"), DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            rotated.SaveImage(fileFolderPath + rotatedFilename);
         }
 
 
-        private void btnTemplateMatch_Click(object sender, EventArgs e)
+        private void btnAutoRotateImage_Click(object sender, EventArgs e)
         {
-            TemplateMatch(@"..\..\..\ExampleFiles\TH-01_AG4.jpg");
+            RotateImage(@"..\..\..\ExampleFiles\", @"TH-01_AG4.jpg", cbxShowMessageboxes.Checked);
 
-
-
+            // Just checking to see if a rotated image looks as if it has been properly rotated. The calculated re-rotation was .01, which is below the threshold of about .2 degrees.
+            //RotateImage(@"..\..\..\ExampleFiles\", @"Rotated_0.30deg_20210213_030604.jpg", cbxShowMessageboxes.Checked);
 
         }
+
+
+        private static void rotateImage(double angle, double scale, Mat src, Mat dst)
+        {
+            var imageCenter = new Point2f(src.Cols / 2f, src.Rows / 2f);
+            var rotationMat = Cv2.GetRotationMatrix2D(imageCenter, angle, scale);
+            Cv2.WarpAffine(src, dst, rotationMat, src.Size());
+        }
+
     }
 }
