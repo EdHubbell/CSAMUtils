@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExampleFiles", "ExampleFile
 	ProjectSection(SolutionItems) = preProject
 		ExampleFiles\BH-01_AG1.jpg = ExampleFiles\BH-01_AG1.jpg
 		ExampleFiles\ExampleImage.jpg = ExampleFiles\ExampleImage.jpg
+		ExampleFiles\ExampleImageRotate10deg.jpg = ExampleFiles\ExampleImageRotate10deg.jpg
+		ExampleFiles\ExampleImageRotate4.jpg = ExampleFiles\ExampleImageRotate4.jpg
+		ExampleFiles\ExampleImageRotateNeg10.jpg = ExampleFiles\ExampleImageRotateNeg10.jpg
+		ExampleFiles\ExampleImageRotateNeg4.jpg = ExampleFiles\ExampleImageRotateNeg4.jpg
 		ExampleFiles\TH-01_AG1.jpg = ExampleFiles\TH-01_AG1.jpg
 		ExampleFiles\TH-01_AG4.jpg = ExampleFiles\TH-01_AG4.jpg
 	EndProjectSection
