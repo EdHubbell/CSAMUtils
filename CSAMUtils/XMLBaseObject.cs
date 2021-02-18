@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
@@ -16,7 +11,7 @@ namespace XMLConfigFile
 {
     public class XMLBaseObject
     {
-        protected static Logger logger = LogManager.GetLogger("EventLog");
+        protected static Logger logger = LogManager.GetCurrentClassLogger();
 
         protected static XmlWriterSettings GetXmlWriterSettings()
         {

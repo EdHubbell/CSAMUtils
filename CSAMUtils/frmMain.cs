@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using OpenCvSharp;
 using MathNet.Numerics.Statistics;
 
-namespace CSAMEval
+namespace CSAMUtils
 {
     public partial class frmMain : Form
     {
@@ -153,7 +153,7 @@ namespace CSAMEval
 
         private void btnAutoRotateImage_Click(object sender, EventArgs e)
         {
-            RotateImage(@"..\..\..\ExampleFiles\", @"ExampleImageRotateNeg10.jpg", cbxShowMessageboxes.Checked);
+            RotateImage(@"..\..\..\ExampleFiles\", @"ExampleImage.jpg", cbxShowMessageboxes.Checked);
 
             // Just checking to see if a rotated image looks as if it has been properly rotated. The calculated re-rotation was .01, which is below the threshold of about .2 degrees.
             //RotateImage(@"..\..\..\ExampleFiles\", @"Rotated_0.30deg_20210213_030604.jpg", cbxShowMessageboxes.Checked);
@@ -168,5 +168,9 @@ namespace CSAMEval
             Cv2.WarpAffine(src, dst, rotationMat, src.Size());
         }
 
+        private void btnMatchTemplate_Click(object sender, EventArgs e)
+        {
+            TemplateMatch.MatchTranspTemplate(@"..\..\..\ExampleFiles\Templates\ExampleRotated.jpg", @"..\..\..\ExampleFiles\Templates\renderedTemplate.png", true, pbxCSAMImage , pbxProcessed );
+        }
     }
 }
