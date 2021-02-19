@@ -3,6 +3,7 @@ using MathNet.Numerics.Statistics;
 using OpenCvSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace CSAMUtils
@@ -16,6 +17,9 @@ namespace CSAMUtils
 
             try
             {
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+
                 iboxProcessed.Image = null;
                 iboxProcessed.Refresh();
 
@@ -136,6 +140,10 @@ namespace CSAMUtils
                 double rotationAngle = ((meanAngleNear0) * anglesNear0.Count + (meanAngleNear90 - 90) * anglesNear90.Count) / (anglesNear0.Count + anglesNear90.Count);
 
                 LogEvent("hough lines", showMessageBoxes, imageOutP, iboxProcessed);
+
+                stopWatch.Stop();
+                // Get the elapsed time as a TimeSpan value. Less than 400msec in debug mode via IDE.
+                TimeSpan ts = stopWatch.Elapsed;
 
                 Mat rotated = new Mat();
                 Cv2E.RotateDegrees(src, rotated, rotationAngle);
