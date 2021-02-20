@@ -25,8 +25,9 @@ namespace CSAMUtils
         private void btnAutoRotateImage_Click(object sender, EventArgs e)
         {
 
+            double msecElapsedTime = 0;
             string outputFileName = string.Format("Rotated_{0}.jpg", DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            AutoRotate.RotateImage (@"..\..\..\ExampleFiles\", @"ExampleImage.jpg", cbxShowMessageboxes.Checked, pbxCSAMImage , pbxProcessed , @"..\..\..\TempFiles\", outputFileName);
+            AutoRotate.AutoRotateImage (@"..\..\..\ExampleFiles\", @"TryThis.jpg", cbxShowMessageboxes.Checked, pbxCSAMImage , pbxProcessed , @"..\..\..\TempFiles\", outputFileName, out msecElapsedTime);
 
             // Just checking to see if a rotated image looks as if it has been properly rotated. The calculated re-rotation was .01, which is below the threshold of about .2 degrees.
             //RotateImage(@"..\..\..\ExampleFiles\", @"Rotated_0.30deg_20210213_030604.jpg", cbxShowMessageboxes.Checked);

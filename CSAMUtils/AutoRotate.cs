@@ -8,11 +8,14 @@ using System.Windows.Forms;
 
 namespace CSAMUtils
 {
-    static class AutoRotate
+    public static class AutoRotate
     {
-
-        public static void RotateImage(string inputFileFolderPath, string inputFileName, bool showMessageBoxes, ImageBox iboxRaw, ImageBox iboxProcessed, string outputFileFolderPath, string outputFileName)
+        public static double? GetRotationAngle(string inputFileFolderPath, string inputFileName, bool showMessageBoxes, ImageBox iboxRaw, ImageBox iboxProcessed, out double msecElapsed)
         {
+            double? rotationAngle = null;
+            msecElapsed = 0;
+
+            // Hough algo does a bad job detecting horizontal lines. So we rotate the image by a set amount before running the Hough. 
             double houghRotationOffsetAngle = 25.0;
 
             try
@@ -20,12 +23,18 @@ namespace CSAMUtils
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
 
-                iboxProcessed.Image = null;
-                iboxProcessed.Refresh();
+                if (iboxProcessed != null)
+                {
+                    iboxProcessed.Image = null;
+                    iboxProcessed.Refresh();
+                }
+
+                Mat rotated = new Mat();
 
                 Mat src = new Mat(inputFileFolderPath + inputFileName, ImreadModes.Grayscale);
 
-                iboxRaw.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(src);
+                if (showMessageBoxes && iboxRaw != null) iboxRaw.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(src);
+
 
                 // Not needed if we read as grayscale to start with. 
                 //Mat src8UC1 = new Mat();
@@ -59,7 +68,7 @@ namespace CSAMUtils
                 // offset rotationally. 
                 Rect r1 = new Rect(new OpenCvSharp.Point(1000, 1000), new OpenCvSharp.Size(500, 300));
                 var roi = new Mat(clahe, r1);
-                Mat template = new Mat(new OpenCvSharp.Size(500, 300), MatType.CV_8UC1);
+                Mat template = new Mat(new OpenCvSharp.Size(200, 100), MatType.CV_8UC1);
                 roi.CopyTo(template);
 
                 LogEvent("template", showMessageBoxes, template, iboxProcessed);
@@ -133,29 +142,65 @@ namespace CSAMUtils
 
                 }
 
-                double meanAngleNear0 = anglesNear0.Mean();
-                double meanAngleNear90 = anglesNear90.Mean();
+                double meanAngleNear0 = 0;
+                if (anglesNear0.Count > 0) meanAngleNear0 = anglesNear0.Mean();
+
+                double meanAngleNear90 = 90;
+                if (anglesNear90.Count > 0) meanAngleNear90 = anglesNear90.Mean();
+
+
 
                 // Use both the vertical and horizontal to calculate the image angle with a weighted average. It might be more accurate to use median instead of mean here.
-                double rotationAngle = ((meanAngleNear0) * anglesNear0.Count + (meanAngleNear90 - 90) * anglesNear90.Count) / (anglesNear0.Count + anglesNear90.Count);
+                rotationAngle = ((meanAngleNear0) * anglesNear0.Count + (meanAngleNear90 - 90) * anglesNear90.Count) / (anglesNear0.Count + anglesNear90.Count);
 
                 LogEvent("hough lines", showMessageBoxes, imageOutP, iboxProcessed);
 
                 stopWatch.Stop();
                 // Get the elapsed time as a TimeSpan value. Less than 400msec in debug mode via IDE.
                 TimeSpan ts = stopWatch.Elapsed;
+                msecElapsed = ts.TotalMilliseconds;
 
-                Mat rotated = new Mat();
-                Cv2E.RotateDegrees(src, rotated, rotationAngle);
-
-                rotated.SaveImage(outputFileFolderPath + outputFileName);
 
             }
             catch (Exception ex)
             {
             }
 
+            return rotationAngle;
 
+        }
+
+
+        /// <summary>
+        /// Auto rotates an image and returns the angle used to rotate the image
+        /// </summary>
+        /// <returns></returns>
+        public static double? AutoRotateImage(string inputFileFolderPath, string inputFileName, bool showMessageBoxes, ImageBox iboxRaw, ImageBox iboxProcessed, string outputFileFolderPath, string outputFileName, out double msecRotation)
+        {
+            double? rotationAngle = null;
+            msecRotation = 0;
+
+            try
+            {
+                rotationAngle = GetRotationAngle(inputFileFolderPath, inputFileName, showMessageBoxes, iboxRaw, iboxProcessed, out msecRotation);
+
+                if (rotationAngle != null)
+                {
+                    Mat rotated = new Mat();
+
+                    Mat src = new Mat(inputFileFolderPath + inputFileName, ImreadModes.Unchanged);
+
+                    Cv2E.RotateDegrees(src, rotated, (double)rotationAngle);
+
+                    rotated.SaveImage(outputFileFolderPath + outputFileName);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+            return rotationAngle;
         }
 
 
