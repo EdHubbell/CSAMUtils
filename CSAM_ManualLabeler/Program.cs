@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NLog;
 
-namespace CSAMUtils
+namespace CSAM_Manual
 {
     static class Program
     {
@@ -18,6 +18,7 @@ namespace CSAMUtils
         public const string CONFIG_PATH = @"C:\CSAM_Manual\config\";
         public const string TEMP_PATH = @"C:\CSAM_Manual\temp\";
         public const string LOG_PATH = @"C:\CSAM_Manual\logs\";
+        public const string RECIPE_PATH = @"C:\CSAM_Manual\recipes\";
 
         private static string sProgramVersion;
 
@@ -55,6 +56,7 @@ namespace CSAMUtils
                 Directory.CreateDirectory(CONFIG_PATH);
                 Directory.CreateDirectory(TEMP_PATH);
                 Directory.CreateDirectory(LOG_PATH);
+                Directory.CreateDirectory(RECIPE_PATH);
 
                 string[] arguments = Environment.GetCommandLineArgs();
 
@@ -66,7 +68,7 @@ namespace CSAMUtils
 
                     // This is necessary in order to get the main program to run on the STA thread. Which is 
                     // needed when running anything that uses OLE, etc. 
-                    var thread = new Thread(() => Application.Run(new frmMain()));
+                    var thread = new Thread(() => Application.Run(new frmMain(sProgramVersion)));
                     thread.SetApartmentState(ApartmentState.STA);
                     thread.Start();
                 }

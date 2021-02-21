@@ -68,7 +68,7 @@ namespace CSAMUtils
                 // offset rotationally. 
                 Rect r1 = new Rect(new OpenCvSharp.Point(1000, 1000), new OpenCvSharp.Size(500, 300));
                 var roi = new Mat(clahe, r1);
-                Mat template = new Mat(new OpenCvSharp.Size(200, 100), MatType.CV_8UC1);
+                Mat template = new Mat(new OpenCvSharp.Size(500, 300), MatType.CV_8UC1);
                 roi.CopyTo(template);
 
                 LogEvent("template", showMessageBoxes, template, iboxProcessed);
