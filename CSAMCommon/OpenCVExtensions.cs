@@ -30,6 +30,11 @@ namespace CSAMCommon
             return new Scalar(color.B, color.G, color.R);
         }
 
+        public static bool PointInRect(OpenCvSharp.Point point, Rect rect)
+        {
+            return (point.X >= rect.X && point.X <= rect.X + rect.Width && point.Y >= rect.Y && point.Y <= rect.Y + rect.Height);
+        }
+
 
     }
 }

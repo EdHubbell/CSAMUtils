@@ -33,6 +33,9 @@ namespace CSAM_Manual
             this.iboxPanel = new Cyotek.Windows.Forms.ImageBox();
             this.cmsPanelImageBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMarkAsCorner = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFailTEMS = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPassTEMS = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiResetTEMS = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsPanelImageBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,16 +52,43 @@ namespace CSAM_Manual
             // cmsPanelImageBox
             // 
             this.cmsPanelImageBox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMarkAsCorner});
+            this.tsmiMarkAsCorner,
+            this.tsmiFailTEMS,
+            this.tsmiPassTEMS,
+            this.tsmiResetTEMS});
             this.cmsPanelImageBox.Name = "contextMenuStrip1";
-            this.cmsPanelImageBox.Size = new System.Drawing.Size(157, 26);
+            this.cmsPanelImageBox.Size = new System.Drawing.Size(181, 114);
             // 
             // tsmiMarkAsCorner
             // 
             this.tsmiMarkAsCorner.Name = "tsmiMarkAsCorner";
-            this.tsmiMarkAsCorner.Size = new System.Drawing.Size(156, 22);
+            this.tsmiMarkAsCorner.Size = new System.Drawing.Size(180, 22);
             this.tsmiMarkAsCorner.Text = "Mark As Corner";
             this.tsmiMarkAsCorner.Click += new System.EventHandler(this.tsmiMarkAsCorner_Click);
+            // 
+            // tsmiFailTEMS
+            // 
+            this.tsmiFailTEMS.Name = "tsmiFailTEMS";
+            this.tsmiFailTEMS.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFailTEMS.Tag = "Fail";
+            this.tsmiFailTEMS.Text = "Fail TEMS";
+            this.tsmiFailTEMS.Click += new System.EventHandler(this.tsmiFailTEMS_Click);
+            // 
+            // tsmiPassTEMS
+            // 
+            this.tsmiPassTEMS.Name = "tsmiPassTEMS";
+            this.tsmiPassTEMS.Size = new System.Drawing.Size(180, 22);
+            this.tsmiPassTEMS.Tag = "Pass";
+            this.tsmiPassTEMS.Text = "Pass TEMS";
+            this.tsmiPassTEMS.Click += new System.EventHandler(this.tsmiPassTEMS_Click);
+            // 
+            // tsmiResetTEMS
+            // 
+            this.tsmiResetTEMS.Name = "tsmiResetTEMS";
+            this.tsmiResetTEMS.Size = new System.Drawing.Size(180, 22);
+            this.tsmiResetTEMS.Tag = "NA";
+            this.tsmiResetTEMS.Text = "Reset TEMS";
+            this.tsmiResetTEMS.Click += new System.EventHandler(this.tsmiResetTEMS_Click);
             // 
             // ucPanelImageBox
             // 
@@ -78,5 +108,8 @@ namespace CSAM_Manual
         private Cyotek.Windows.Forms.ImageBox iboxPanel;
         private System.Windows.Forms.ContextMenuStrip cmsPanelImageBox;
         private System.Windows.Forms.ToolStripMenuItem tsmiMarkAsCorner;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFailTEMS;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPassTEMS;
+        private System.Windows.Forms.ToolStripMenuItem tsmiResetTEMS;
     }
 }

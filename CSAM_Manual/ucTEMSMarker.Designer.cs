@@ -32,9 +32,10 @@ namespace CSAM_Manual
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpTH = new System.Windows.Forms.TabPage();
-            this.tpBH = new System.Windows.Forms.TabPage();
             this.pibTH = new CSAM_Manual.ucPanelImageBox();
+            this.tpBH = new System.Windows.Forms.TabPage();
             this.pibBH = new CSAM_Manual.ucPanelImageBox();
+            this.pnlRight = new System.Windows.Forms.Panel();
             this.tlpMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpTH.SuspendLayout();
@@ -47,6 +48,7 @@ namespace CSAM_Manual
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tlpMain.Controls.Add(this.tabControl1, 0, 0);
+            this.tlpMain.Controls.Add(this.pnlRight, 1, 1);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
             this.tlpMain.Name = "tlpMain";
@@ -80,6 +82,15 @@ namespace CSAM_Manual
             this.tpTH.Text = "TH";
             this.tpTH.UseVisualStyleBackColor = true;
             // 
+            // pibTH
+            // 
+            this.pibTH.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pibTH.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pibTH.Location = new System.Drawing.Point(3, 3);
+            this.pibTH.Name = "pibTH";
+            this.pibTH.Size = new System.Drawing.Size(318, 296);
+            this.pibTH.TabIndex = 0;
+            // 
             // tpBH
             // 
             this.tpBH.Controls.Add(this.pibBH);
@@ -91,15 +102,6 @@ namespace CSAM_Manual
             this.tpBH.Text = "BH";
             this.tpBH.UseVisualStyleBackColor = true;
             // 
-            // pibTH
-            // 
-            this.pibTH.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pibTH.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pibTH.Location = new System.Drawing.Point(3, 3);
-            this.pibTH.Name = "pibTH";
-            this.pibTH.Size = new System.Drawing.Size(318, 296);
-            this.pibTH.TabIndex = 0;
-            // 
             // pibBH
             // 
             this.pibBH.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -108,6 +110,14 @@ namespace CSAM_Manual
             this.pibBH.Name = "pibBH";
             this.pibBH.Size = new System.Drawing.Size(318, 296);
             this.pibBH.TabIndex = 1;
+            // 
+            // pnlRight
+            // 
+            this.pnlRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRight.Location = new System.Drawing.Point(341, 43);
+            this.pnlRight.Name = "pnlRight";
+            this.pnlRight.Size = new System.Drawing.Size(194, 248);
+            this.pnlRight.TabIndex = 1;
             // 
             // ucTEMSMarker
             // 
@@ -132,5 +142,6 @@ namespace CSAM_Manual
         private System.Windows.Forms.TabPage tpBH;
         private ucPanelImageBox pibTH;
         private ucPanelImageBox pibBH;
+        private System.Windows.Forms.Panel pnlRight;
     }
 }

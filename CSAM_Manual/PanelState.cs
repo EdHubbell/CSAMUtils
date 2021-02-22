@@ -10,6 +10,14 @@ using CSAMCommon;
 
 namespace CSAM_Manual
 {
+
+    public enum PanelImageSides
+    {
+        TH,
+        BH
+    }
+
+
     public enum TEMS_InspectionStates
     {
         NA,
@@ -18,7 +26,7 @@ namespace CSAM_Manual
     }
 
 
-    public class Panel_State : XMLBaseObject
+    public class PanelState : XMLBaseObject
     {
 
         public string LotID;
@@ -27,15 +35,19 @@ namespace CSAM_Manual
         public List<TEMS_State> TEMS_States = new List<TEMS_State>();
 
 
-        [XmlIgnore]
-        public Dictionary<Point, TEMS_State> dictTEMS_States = new Dictionary<Point, TEMS_State>();
+        //[XmlIgnore]
+        //public Dictionary<Point, TEMS_State> dictPoint_TEMS_States = new Dictionary<Point, TEMS_State>();
 
-        public Panel_State()
+        //[XmlIgnore]
+        //public Dictionary<int, TEMS_State> dictDeviceID_TEMS_States = new Dictionary<int, TEMS_State>();
+
+
+        public PanelState()
         {
 
         }
 
-        public Panel_State(string lotID, CSAM_ManualRecipe recipe)
+        public PanelState(string lotID, CSAM_ManualRecipe recipe)
         {
 
             LotID = lotID;
@@ -62,16 +74,31 @@ namespace CSAM_Manual
 
                     TEMS_States.Add(tems_state);
 
-                    dictTEMS_States.Add(new Point(x, y), tems_state);
+                    //dictPoint_TEMS_States.Add(new Point(x, y), tems_state);
+
+                    //dictDeviceID_TEMS_States.Add(deviceIndex, tems_state);
 
                 }
 
             }
-
         }
 
-    }
 
+        public TEMS_State GetTEMS_State(int deviceIndex)
+        {
+            // Usually, lists are in order. Usually. We can do a dict too, but I don't really want to this early on. 
+            if (TEMS_States[deviceIndex - 1].DeviceIndex == deviceIndex) return TEMS_States[deviceIndex - 1];
+
+            // In case the list isn't in order.
+            for (int index = 0; index < TEMS_States.Count; index++)
+            {
+                if (TEMS_States[index].DeviceIndex == deviceIndex) return TEMS_States[index];
+            }
+
+            return null;
+
+        }
+    }
 
 
     public class TEMS_State
@@ -79,8 +106,11 @@ namespace CSAM_Manual
         public int Row = -1;
         public int Col = -1;
         public int DeviceIndex = -1;
-        public TEMS_InspectionStates TH_State = TEMS_InspectionStates.NA;
-        public TEMS_InspectionStates BH_State = TEMS_InspectionStates.NA;
+        public TEMS_InspectionStates TH_InspectionState = TEMS_InspectionStates.NA;
+        public TEMS_InspectionStates BH_InspectionState = TEMS_InspectionStates.NA;
+
+        public OpenCvSharp.Rect TH_Rect;
+        public OpenCvSharp.Rect BH_Rect;
 
 
         public TEMS_State()
@@ -91,6 +121,7 @@ namespace CSAM_Manual
             Row = row;
             Col = col;
             DeviceIndex = deviceIndex;
+
         }
     }
 

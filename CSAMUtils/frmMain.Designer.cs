@@ -45,11 +45,10 @@ namespace CSAMUtils
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1600, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(1600, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -63,14 +62,14 @@ namespace CSAMUtils
             this.tlpMain.Controls.Add(this.panel1, 0, 0);
             this.tlpMain.Controls.Add(this.panel2, 1, 0);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpMain.Location = new System.Drawing.Point(0, 48);
+            this.tlpMain.Location = new System.Drawing.Point(0, 24);
             this.tlpMain.Margin = new System.Windows.Forms.Padding(6);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 3;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 77F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tlpMain.Size = new System.Drawing.Size(1600, 817);
+            this.tlpMain.Size = new System.Drawing.Size(1600, 841);
             this.tlpMain.TabIndex = 2;
             // 
             // pbxProcessed
@@ -79,7 +78,7 @@ namespace CSAMUtils
             this.pbxProcessed.Location = new System.Drawing.Point(806, 83);
             this.pbxProcessed.Margin = new System.Windows.Forms.Padding(6);
             this.pbxProcessed.Name = "pbxProcessed";
-            this.pbxProcessed.Size = new System.Drawing.Size(788, 690);
+            this.pbxProcessed.Size = new System.Drawing.Size(788, 714);
             this.pbxProcessed.TabIndex = 3;
             // 
             // pbxCSAMImage
@@ -88,7 +87,7 @@ namespace CSAMUtils
             this.pbxCSAMImage.Location = new System.Drawing.Point(6, 83);
             this.pbxCSAMImage.Margin = new System.Windows.Forms.Padding(6);
             this.pbxCSAMImage.Name = "pbxCSAMImage";
-            this.pbxCSAMImage.Size = new System.Drawing.Size(788, 690);
+            this.pbxCSAMImage.Size = new System.Drawing.Size(788, 714);
             this.pbxCSAMImage.TabIndex = 4;
             // 
             // panel1
@@ -112,7 +111,7 @@ namespace CSAMUtils
             // 
             // btnAutoRotateImage
             // 
-            this.btnAutoRotateImage.Location = new System.Drawing.Point(233, 3);
+            this.btnAutoRotateImage.Location = new System.Drawing.Point(232, 3);
             this.btnAutoRotateImage.Margin = new System.Windows.Forms.Padding(6);
             this.btnAutoRotateImage.Name = "btnAutoRotateImage";
             this.btnAutoRotateImage.Size = new System.Drawing.Size(261, 50);

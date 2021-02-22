@@ -6,7 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NLog;
 
@@ -16,7 +15,7 @@ namespace CSAM_Manual
     {
         Logger logger = LogManager.GetCurrentClassLogger();
 
-        Panel_State currentPanelState = null;
+        PanelState currentPanelState = null;
 
         Image imgRawTH = null;
         Image imgRawBH = null;
@@ -53,7 +52,7 @@ namespace CSAM_Manual
                     return;
                 }
 
-                currentPanelState = new Panel_State("test", ucRecipeEditor1.LoadedRecipe);
+                currentPanelState = new PanelState("test", ucRecipeEditor1.LoadedRecipe);
 
                 using (var fbd = new FolderBrowserDialog())
                 {
@@ -63,11 +62,11 @@ namespace CSAM_Manual
                     if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                     {
                         fileNameTH = fbd.SelectedPath + @"\" + LoadedRecipe.TH_AG1_Filename_Format;
-                        ucTEMSMarker1.panelImageBoxTH.LoadImage(fileNameTH);
+                        ucTEMSMarker1.panelImageBoxTH.LoadImage(fileNameTH, PanelImageSides.TH, currentPanelState , LoadedRecipe);
 
 
                         fileNameBH = fbd.SelectedPath + @"\" + LoadedRecipe.BH_AG1_Filename_Format;
-                        ucTEMSMarker1.panelImageBoxBH.LoadImage(fileNameBH);
+                        ucTEMSMarker1.panelImageBoxBH.LoadImage(fileNameBH, PanelImageSides.BH, currentPanelState, LoadedRecipe);
 
 
                         string[] files = Directory.GetFiles(fbd.SelectedPath);
@@ -86,7 +85,6 @@ namespace CSAM_Manual
 
 
         }
-
 
     }
 }

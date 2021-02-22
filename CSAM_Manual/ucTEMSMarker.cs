@@ -18,29 +18,29 @@ namespace CSAM_Manual
             InitializeComponent();
         }
 
-        public ImageBox imageBoxTH
-        {
-            get
-            {
-                return imageBoxTH;
-            }
-            set
-            {
-                imageBoxTH = value;
-            }
-        }
+        //public ImageBox imageBoxTH
+        //{
+        //    get
+        //    {
+        //        return imageBoxTH;
+        //    }
+        //    set
+        //    {
+        //        imageBoxTH = value;
+        //    }
+        //}
 
-        public ImageBox imageBoxBH
-        {
-            get
-            {
-                return imageBoxBH;
-            }
-            set
-            {
-                imageBoxBH = value;
-            }
-        }
+        //public ImageBox imageBoxBH
+        //{
+        //    get
+        //    {
+        //        return imageBoxBH;
+        //    }
+        //    set
+        //    {
+        //        imageBoxBH = value;
+        //    }
+        //}
 
 
 
