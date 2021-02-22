@@ -72,6 +72,7 @@ namespace CSAM_Manual
             this.tsmiFailTEMS.Size = new System.Drawing.Size(180, 22);
             this.tsmiFailTEMS.Tag = "Fail";
             this.tsmiFailTEMS.Text = "Fail TEMS";
+            this.tsmiFailTEMS.Click += new System.EventHandler(this.tsmiFailTEMS_Click);
             // 
             // tsmiPassTEMS
             // 
@@ -79,6 +80,7 @@ namespace CSAM_Manual
             this.tsmiPassTEMS.Size = new System.Drawing.Size(180, 22);
             this.tsmiPassTEMS.Tag = "Pass";
             this.tsmiPassTEMS.Text = "Pass TEMS";
+            this.tsmiPassTEMS.Click += new System.EventHandler(this.tsmiPassTEMS_Click);
             // 
             // tsmiResetTEMS
             // 
@@ -86,6 +88,7 @@ namespace CSAM_Manual
             this.tsmiResetTEMS.Size = new System.Drawing.Size(180, 22);
             this.tsmiResetTEMS.Tag = "NA";
             this.tsmiResetTEMS.Text = "Reset TEMS";
+            this.tsmiResetTEMS.Click += new System.EventHandler(this.tsmiResetTEMS_Click);
             // 
             // ucPanelImageBox
             // 

@@ -62,11 +62,11 @@ namespace CSAM_Manual
                     if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                     {
                         fileNameTH = fbd.SelectedPath + @"\" + LoadedRecipe.TH_AG1_Filename_Format;
-                        ucTEMSMarker1.panelImageBoxTH.LoadImage(fileNameTH);
+                        ucTEMSMarker1.panelImageBoxTH.LoadImage(fileNameTH, PanelImageSides.TH, currentPanelState, LoadedRecipe);
 
 
                         fileNameBH = fbd.SelectedPath + @"\" + LoadedRecipe.BH_AG1_Filename_Format;
-                        ucTEMSMarker1.panelImageBoxBH.LoadImage(fileNameBH);
+                        ucTEMSMarker1.panelImageBoxBH.LoadImage(fileNameBH, PanelImageSides.BH, currentPanelState, LoadedRecipe);
 
 
                         string[] files = Directory.GetFiles(fbd.SelectedPath);
