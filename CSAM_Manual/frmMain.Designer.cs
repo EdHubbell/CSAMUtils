@@ -45,7 +45,6 @@ namespace CSAM_Manual
             this.tcMain.SuspendLayout();
             this.tpImages.SuspendLayout();
             this.tpRecipe.SuspendLayout();
-            this.pnlFooter.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +56,7 @@ namespace CSAM_Manual
             this.tlpMain.Controls.Add(this.tcMain, 0, 0);
             this.tlpMain.Controls.Add(this.pnlFooter, 0, 1);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpMain.Location = new System.Drawing.Point(0, 24);
+            this.tlpMain.Location = new System.Drawing.Point(0, 42);
             this.tlpMain.Margin = new System.Windows.Forms.Padding(2);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 2;
@@ -79,8 +78,7 @@ namespace CSAM_Manual
             // 
             // tpImages
             // 
-            this.tpImages.Controls.Add(this.ucTEMSMarker1);
-            this.tpImages.Location = new System.Drawing.Point(4, 22);
+            this.tpImages.Location = new System.Drawing.Point(8, 44);
             this.tpImages.Name = "tpImages";
             this.tpImages.Padding = new System.Windows.Forms.Padding(3);
             this.tpImages.Size = new System.Drawing.Size(912, 429);
@@ -99,13 +97,12 @@ namespace CSAM_Manual
             // 
             // tpRecipe
             // 
-            this.tpRecipe.Controls.Add(this.ucRecipeEditor1);
-            this.tpRecipe.Location = new System.Drawing.Point(4, 22);
+            this.tpRecipe.Location = new System.Drawing.Point(8, 44);
             this.tpRecipe.Name = "tpRecipe";
             this.tpRecipe.Padding = new System.Windows.Forms.Padding(3);
             this.tpRecipe.Size = new System.Drawing.Size(892, 413);
             this.tpRecipe.TabIndex = 1;
-            this.tpRecipe.Text = "Recipe";
+            this.tpRecipe.Text = "Recip";
             this.tpRecipe.UseVisualStyleBackColor = true;
             // 
             // ucRecipeEditor1
@@ -123,7 +120,7 @@ namespace CSAM_Manual
             this.pnlFooter.Controls.Add(this.lblStatus);
             this.pnlFooter.Controls.Add(this.lblStatusLabel);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFooter.Location = new System.Drawing.Point(3, 464);
+            this.pnlFooter.Location = new System.Drawing.Point(3, 446);
             this.pnlFooter.Name = "pnlFooter";
             this.pnlFooter.Size = new System.Drawing.Size(920, 34);
             this.pnlFooter.TabIndex = 1;
@@ -144,7 +141,7 @@ namespace CSAM_Manual
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -176,7 +173,7 @@ namespace CSAM_Manual
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 525);
             this.Controls.Add(this.tlpMain);
@@ -189,8 +186,6 @@ namespace CSAM_Manual
             this.tcMain.ResumeLayout(false);
             this.tpImages.ResumeLayout(false);
             this.tpRecipe.ResumeLayout(false);
-            this.pnlFooter.ResumeLayout(false);
-            this.pnlFooter.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
