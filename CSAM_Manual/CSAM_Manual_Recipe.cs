@@ -35,17 +35,17 @@ namespace CSAM_Manual
         [Description("The number of TEMS in the Y-direction of the panel")]
         public int TEMS_Count_Y { get; set; } = 30;
 
-        [Category("Panel")]
-        [Browsable(true)]
-        [Description("TH_AG4_Template image file")]
-        [EditorAttribute(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
-        public string Template_TH_AG4 { get; set; } = "";
+        //[Category("Panel")]
+        //[Browsable(true)]
+        //[Description("TH_AG4_Template image file")]
+        //[EditorAttribute(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        //public string Template_TH_AG4 { get; set; } = "";
 
-        [Category("Panel")]
-        [Browsable(true)]
-        [Description("BH_AG4_Template image file")]
-        [EditorAttribute(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
-        public string Template_BH_AG4 { get; set; } = "";
+        //[Category("Panel")]
+        //[Browsable(true)]
+        //[Description("BH_AG4_Template image file")]
+        //[EditorAttribute(typeof(System.Windows.Forms.Design.FileNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        //public string Template_BH_AG4 { get; set; } = "";
 
 
 
@@ -54,26 +54,26 @@ namespace CSAM_Manual
         [Description("BH AG1 Filename string format")]
         public string BH_AG1_Filename_Format { get; set; } = @"BH-01_CSAM2_AG1.jpg";
 
-        [Category("FileConfig")]
-        [Browsable(true)]
-        [Description("BH AG4 Filename string format")]
-        public string BH_AG4_Filename_Format { get; set; } = @"BH-01_CSAM2_AG4.jpg";
+        //[Category("FileConfig")]
+        //[Browsable(true)]
+        //[Description("BH AG4 Filename string format")]
+        //public string BH_AG4_Filename_Format { get; set; } = @"BH-01_CSAM2_AG4.jpg";
 
         [Category("FileConfig")]
         [Browsable(true)]
         [Description("TH AG1 Filename string format")]
         public string TH_AG1_Filename_Format { get; set; } = @"TH-01_CSAM2_AG1.jpg";
 
-        [Category("FileConfig")]
-        [Browsable(true)]
-        [Description("TH AG4 Filename string format")]
-        public string TH_AG4_Filename_Format { get; set; } = @"TH-01_CSAM2_AG1.jpg";
+        //[Category("FileConfig")]
+        //[Browsable(true)]
+        //[Description("TH AG4 Filename string format")]
+        //public string TH_AG4_Filename_Format { get; set; } = @"TH-01_CSAM2_AG4.jpg";
 
-        [Category("FileConfig")]
-        [Browsable(true)]
-        [Description("Folder to open when selecting a TEMS panel")]
-        [EditorAttribute(typeof(System.Windows.Forms.Design.FolderNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
-        public string DefaultFolderPath { get; set; } = @"C:\Development\Github\CSAMUtils\CSAM_ManualLabeler";
+        //[Category("FileConfig")]
+        //[Browsable(true)]
+        //[Description("Folder to open when selecting a TEMS panel")]
+        //[EditorAttribute(typeof(System.Windows.Forms.Design.FolderNameEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        //public string DefaultFolderPath { get; set; } = @"C:\Development\Github\CSAMUtils\CSAM_ManualLabeler";
         // Damn FolderNameEditor doesn't end paths with a \ like I think it should. 
 
 

@@ -8,25 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using NLog;
+using Ookii.Dialogs.WinForms;
 
 namespace CSAM_Manual
 {
     public partial class frmMain : Form
     {
         Logger logger = LogManager.GetCurrentClassLogger();
-
-        PanelState currentPanelState = null;
-
-        Image imgRawTH = null;
-        Image imgRawBH = null;
-
-        Image imgOverlayTH = null;
-        Image imgOverlayBH = null;
-
-        string fileNameTH = "";
-        string fileNameBH = "";
-
-
 
         public frmMain(string sProgramVersion)
         {
@@ -52,29 +40,21 @@ namespace CSAM_Manual
                     return;
                 }
 
-                currentPanelState = new PanelState("test", ucRecipeEditor1.LoadedRecipe);
 
-                using (var fbd = new FolderBrowserDialog())
+                using (VistaFolderBrowserDialog dialog = new VistaFolderBrowserDialog())
                 {
-                    fbd.SelectedPath = ucRecipeEditor1.LoadedRecipe.DefaultFolderPath;
-                    DialogResult result = fbd.ShowDialog();
-
-                    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                   // dialog.SelectedPath  = LoadedRecipe.DefaultFolderPath + @"\";
+                    //dialog.InitialDirectory = LoadedRecipe.DefaultFolderPath;
+                    //dialog.IsFolderPicker = true;
+                    if (dialog.ShowDialog() == DialogResult.OK)
                     {
-                        fileNameTH = fbd.SelectedPath + @"\" + LoadedRecipe.TH_AG1_Filename_Format;
-                        ucTEMSMarker1.panelImageBoxTH.LoadImage(fileNameTH, PanelImageSides.TH, currentPanelState, LoadedRecipe);
+                        string sFolderName = dialog.SelectedPath ;
 
+                        string lotID = sFolderName.Substring(sFolderName.LastIndexOf(@"\") + 1, sFolderName.Length - (sFolderName.LastIndexOf(@"\") +1) );
 
-                        fileNameBH = fbd.SelectedPath + @"\" + LoadedRecipe.BH_AG1_Filename_Format;
-                        ucTEMSMarker1.panelImageBoxBH.LoadImage(fileNameBH, PanelImageSides.BH, currentPanelState, LoadedRecipe);
-
-
-                        string[] files = Directory.GetFiles(fbd.SelectedPath);
-
-                        System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+                        ucTEMSMarker1.SetLotIDAndFolder(lotID, sFolderName, LoadedRecipe);
                     }
                 }
-
 
 
             }

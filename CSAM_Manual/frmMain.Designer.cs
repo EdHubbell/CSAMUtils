@@ -36,15 +36,16 @@ namespace CSAM_Manual
             this.tpRecipe = new System.Windows.Forms.TabPage();
             this.ucRecipeEditor1 = new CSAM_Manual.ucRecipeEditor();
             this.pnlFooter = new System.Windows.Forms.Panel();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.lblStatusLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblStatusLabel = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tpImages.SuspendLayout();
             this.tpRecipe.SuspendLayout();
+            this.pnlFooter.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@ namespace CSAM_Manual
             this.tlpMain.Controls.Add(this.tcMain, 0, 0);
             this.tlpMain.Controls.Add(this.pnlFooter, 0, 1);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpMain.Location = new System.Drawing.Point(0, 42);
+            this.tlpMain.Location = new System.Drawing.Point(0, 24);
             this.tlpMain.Margin = new System.Windows.Forms.Padding(2);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 2;
@@ -78,7 +79,8 @@ namespace CSAM_Manual
             // 
             // tpImages
             // 
-            this.tpImages.Location = new System.Drawing.Point(8, 44);
+            this.tpImages.Controls.Add(this.ucTEMSMarker1);
+            this.tpImages.Location = new System.Drawing.Point(4, 22);
             this.tpImages.Name = "tpImages";
             this.tpImages.Padding = new System.Windows.Forms.Padding(3);
             this.tpImages.Size = new System.Drawing.Size(912, 429);
@@ -90,19 +92,19 @@ namespace CSAM_Manual
             // 
             this.ucTEMSMarker1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTEMSMarker1.Location = new System.Drawing.Point(3, 3);
-            this.ucTEMSMarker1.Margin = new System.Windows.Forms.Padding(6);
             this.ucTEMSMarker1.Name = "ucTEMSMarker1";
             this.ucTEMSMarker1.Size = new System.Drawing.Size(906, 423);
             this.ucTEMSMarker1.TabIndex = 0;
             // 
             // tpRecipe
             // 
-            this.tpRecipe.Location = new System.Drawing.Point(8, 44);
+            this.tpRecipe.Controls.Add(this.ucRecipeEditor1);
+            this.tpRecipe.Location = new System.Drawing.Point(4, 22);
             this.tpRecipe.Name = "tpRecipe";
             this.tpRecipe.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRecipe.Size = new System.Drawing.Size(892, 413);
+            this.tpRecipe.Size = new System.Drawing.Size(912, 429);
             this.tpRecipe.TabIndex = 1;
-            this.tpRecipe.Text = "Recip";
+            this.tpRecipe.Text = "Recipe";
             this.tpRecipe.UseVisualStyleBackColor = true;
             // 
             // ucRecipeEditor1
@@ -112,7 +114,7 @@ namespace CSAM_Manual
             this.ucRecipeEditor1.LoadedRecipe = null;
             this.ucRecipeEditor1.Location = new System.Drawing.Point(3, 3);
             this.ucRecipeEditor1.Name = "ucRecipeEditor1";
-            this.ucRecipeEditor1.Size = new System.Drawing.Size(886, 407);
+            this.ucRecipeEditor1.Size = new System.Drawing.Size(906, 423);
             this.ucRecipeEditor1.TabIndex = 0;
             // 
             // pnlFooter
@@ -120,10 +122,30 @@ namespace CSAM_Manual
             this.pnlFooter.Controls.Add(this.lblStatus);
             this.pnlFooter.Controls.Add(this.lblStatusLabel);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFooter.Location = new System.Drawing.Point(3, 446);
+            this.pnlFooter.Location = new System.Drawing.Point(3, 464);
             this.pnlFooter.Name = "pnlFooter";
             this.pnlFooter.Size = new System.Drawing.Size(920, 34);
             this.pnlFooter.TabIndex = 1;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStatus.AutoEllipsis = true;
+            this.lblStatus.Location = new System.Drawing.Point(59, 10);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(857, 18);
+            this.lblStatus.TabIndex = 1;
+            this.lblStatus.Text = "NA";
+            // 
+            // lblStatusLabel
+            // 
+            this.lblStatusLabel.AutoSize = true;
+            this.lblStatusLabel.Location = new System.Drawing.Point(11, 10);
+            this.lblStatusLabel.Name = "lblStatusLabel";
+            this.lblStatusLabel.Size = new System.Drawing.Size(42, 13);
+            this.lblStatusLabel.TabIndex = 0;
+            this.lblStatusLabel.Text = "Status:";
             // 
             // menuStrip1
             // 
@@ -141,7 +163,7 @@ namespace CSAM_Manual
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -151,29 +173,9 @@ namespace CSAM_Manual
             this.openToolStripMenuItem.Text = "Open Folder";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // lblStatusLabel
-            // 
-            this.lblStatusLabel.AutoSize = true;
-            this.lblStatusLabel.Location = new System.Drawing.Point(11, 10);
-            this.lblStatusLabel.Name = "lblStatusLabel";
-            this.lblStatusLabel.Size = new System.Drawing.Size(42, 13);
-            this.lblStatusLabel.TabIndex = 0;
-            this.lblStatusLabel.Text = "Status:";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStatus.AutoEllipsis = true;
-            this.lblStatus.Location = new System.Drawing.Point(59, 10);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(852, 13);
-            this.lblStatus.TabIndex = 1;
-            this.lblStatus.Text = "NA";
-            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 525);
             this.Controls.Add(this.tlpMain);
@@ -186,6 +188,8 @@ namespace CSAM_Manual
             this.tcMain.ResumeLayout(false);
             this.tpImages.ResumeLayout(false);
             this.tpRecipe.ResumeLayout(false);
+            this.pnlFooter.ResumeLayout(false);
+            this.pnlFooter.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -199,14 +203,14 @@ namespace CSAM_Manual
         private System.Windows.Forms.TabControl tcMain;
         private System.Windows.Forms.TabPage tpImages;
         private System.Windows.Forms.TabPage tpRecipe;
-        private ucRecipeEditor ucRecipeEditor1;
         private System.Windows.Forms.Panel pnlFooter;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private ucTEMSMarker ucTEMSMarker1;
         private System.Windows.Forms.Label lblStatusLabel;
         private System.Windows.Forms.Label lblStatus;
+        private ucTEMSMarker ucTEMSMarker1;
+        private ucRecipeEditor ucRecipeEditor1;
     }
 }
 

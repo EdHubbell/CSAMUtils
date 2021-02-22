@@ -38,6 +38,8 @@ namespace CSAM_Manual
 
         private CSAM_ManualRecipe recipe;
 
+        private string _RawFileName; 
+
         public ucPanelImageBox()
         {
             InitializeComponent();
@@ -56,9 +58,9 @@ namespace CSAM_Manual
         {
             if (File.Exists(sFilename))
             {
-                matRaw = new Mat(sFilename, ImreadModes.Unchanged);
+                _RawFileName = sFilename;
 
-                this.iboxPanel.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(matRaw);
+                OpenRawImage();
 
                 _PanelImageSide = panelImageSide;
                 _PanelState = panelState;
@@ -69,6 +71,23 @@ namespace CSAM_Manual
                 MessageBox.Show("Filename doesn't exist: " + sFilename);
             }
         }
+
+
+        private void OpenRawImage()
+        {
+            try
+            {
+                matRaw = new Mat(_RawFileName, ImreadModes.Unchanged);
+
+                this.iboxPanel.Image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(matRaw);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+            }
+
+        }
+
 
         private void tsmiMarkAsCorner_Click(object sender, EventArgs e)
         {
@@ -100,6 +119,8 @@ namespace CSAM_Manual
                     }
                 }
 
+                
+                OpenRawImage();
                 DrawCorners();
                 CalculateRectangles();
                 DrawRectangles();
@@ -138,9 +159,12 @@ namespace CSAM_Manual
                 // If we don't have corners, don't draw rectangles.
                 if (ptLowerLeft == ptDefault || ptUpperLeft == ptDefault || ptLowerRight == ptDefault || ptUpperRight == ptDefault) return;
 
+                int allTemsWidth = (int)(((ptUpperRight.X - ptUpperLeft.X) + (ptLowerRight.X - ptLowerLeft.X)) / 2);
+                int allTemsHeight = (int)(((ptLowerRight.Y - ptUpperRight.Y) + (ptLowerLeft.Y - ptUpperLeft.Y)) / 2);
+
                 // We have corners. We know how many devices. Calculate rectangles.
-                int rectWidth = (int)(((ptUpperRight.X - ptUpperLeft.X) + (ptLowerRight.X - ptLowerLeft.X)) / (2 * recipe.TEMS_Count_X));
-                int rectHeight = (int)(((ptLowerRight.Y - ptUpperRight.Y) + (ptLowerLeft.Y - ptUpperLeft.Y)) / (2 * recipe.TEMS_Count_Y));
+                int rectWidth = (int)(allTemsWidth / recipe.TEMS_Count_X);
+                int rectHeight = (int)(allTemsHeight / recipe.TEMS_Count_Y);
 
 
                 for (int y = 1; y <= recipe.TEMS_Count_Y; y++)
@@ -165,7 +189,14 @@ namespace CSAM_Manual
 
 
                         // Upper left corner of the rectangle.
-                        OpenCvSharp.Point pt = new OpenCvSharp.Point(ptUpperLeft.X + ((x - 1) * rectWidth), ptUpperLeft.Y + ((y - 1) * rectHeight));
+                        int xCoord = (int)((allTemsWidth * (x - 1)) / recipe.TEMS_Count_X);
+                        int yCoord = (int)((allTemsHeight * (y - 1)) / recipe.TEMS_Count_Y);
+
+                        xCoord += ptUpperLeft.X;
+                        yCoord += ptUpperLeft.Y;
+
+                        OpenCvSharp.Point pt = new OpenCvSharp.Point(xCoord, yCoord);
+                        //OpenCvSharp.Point pt = new OpenCvSharp.Point(ptUpperLeft.X + ((x - 1) * rectWidth), ptUpperLeft.Y + ((y - 1) * rectHeight));
 
                         if (_PanelImageSide == PanelImageSides.TH)
                         {
@@ -206,13 +237,13 @@ namespace CSAM_Manual
 
                     if (_PanelImageSide == PanelImageSides.TH)
                     {
-                        Cv2.Rectangle(matRaw, tems_state.TH_Rect, System.Drawing.Color.Red.ToScalar(), 1);
+                        Cv2.Rectangle(matRaw, tems_state.TH_Rect, GetRectangleColor(tems_state).ToScalar(), 1);
                         LabelRectangle(matRaw, tems_state.DeviceIndex.ToString(), tems_state.TH_Rect, Color.Yellow);
                     }
 
                     if (_PanelImageSide == PanelImageSides.BH)
                     {
-                        Cv2.Rectangle(matRaw, tems_state.BH_Rect, System.Drawing.Color.Red.ToScalar(), 1);
+                        Cv2.Rectangle(matRaw, tems_state.BH_Rect, GetRectangleColor(tems_state).ToScalar(), 1);
                         LabelRectangle(matRaw, tems_state.DeviceIndex.ToString(), tems_state.BH_Rect, Color.Yellow);
                     }
 
@@ -233,7 +264,7 @@ namespace CSAM_Manual
         {
             try
             {
-                Cv2.PutText(mat, label, new OpenCvSharp.Point(rect.X + 5, rect.Y + 5), HersheyFonts.HersheyPlain, .7, color.ToScalar(), 1);
+                Cv2.PutText(mat, label, new OpenCvSharp.Point(rect.X + 5, rect.Y + 10), HersheyFonts.HersheyPlain, .7, color.ToScalar(), 1);
             }
             catch (Exception ex)
             {
@@ -366,5 +397,42 @@ namespace CSAM_Manual
             }
         }
 
+        private void iboxPanel_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.P)
+            {
+                TEMS_State currentTEMS_State = GetTEMS_StateAtPoint(ptLatest);
+                currentTEMS_State.SetInspectionState(_PanelImageSide, TEMS_InspectionStates.Pass);
+                DrawRectangles();
+            }
+
+            if (e.KeyCode == Keys.F)
+            {
+                TEMS_State currentTEMS_State = GetTEMS_StateAtPoint(ptLatest);
+                currentTEMS_State.SetInspectionState(_PanelImageSide, TEMS_InspectionStates.Fail);
+                DrawRectangles();
+            }
+
+            if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
+            {
+                TEMS_State currentTEMS_State = GetTEMS_StateAtPoint(ptLatest);
+                currentTEMS_State.SetInspectionState(_PanelImageSide, TEMS_InspectionStates.NA);
+                DrawRectangles();
+            }
+
+            if (e.KeyCode == Keys.Space)
+            {
+                TEMS_State currentTEMS_State = GetTEMS_StateAtPoint(ptLatest);
+                TEMS_InspectionStates currentState = currentTEMS_State.GetInspectionState(_PanelImageSide);
+                TEMS_InspectionStates targetState  = TEMS_InspectionStates.NA;
+                if (currentState == TEMS_InspectionStates.NA) targetState = TEMS_InspectionStates.Pass;
+                if (currentState == TEMS_InspectionStates.Pass) targetState = TEMS_InspectionStates.Fail;
+                currentTEMS_State.SetInspectionState(_PanelImageSide, targetState);
+                DrawRectangles();
+            }
+
+
+        }
     }
 }

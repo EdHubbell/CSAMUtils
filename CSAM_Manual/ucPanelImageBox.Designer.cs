@@ -47,6 +47,7 @@ namespace CSAM_Manual
             this.iboxPanel.Name = "iboxPanel";
             this.iboxPanel.Size = new System.Drawing.Size(270, 243);
             this.iboxPanel.TabIndex = 0;
+            this.iboxPanel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.iboxPanel_KeyDown);
             this.iboxPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.iboxPanel_MouseMove);
             // 
             // cmsPanelImageBox
@@ -57,19 +58,19 @@ namespace CSAM_Manual
             this.tsmiPassTEMS,
             this.tsmiResetTEMS});
             this.cmsPanelImageBox.Name = "contextMenuStrip1";
-            this.cmsPanelImageBox.Size = new System.Drawing.Size(181, 114);
+            this.cmsPanelImageBox.Size = new System.Drawing.Size(157, 92);
             // 
             // tsmiMarkAsCorner
             // 
             this.tsmiMarkAsCorner.Name = "tsmiMarkAsCorner";
-            this.tsmiMarkAsCorner.Size = new System.Drawing.Size(180, 22);
+            this.tsmiMarkAsCorner.Size = new System.Drawing.Size(156, 22);
             this.tsmiMarkAsCorner.Text = "Mark As Corner";
             this.tsmiMarkAsCorner.Click += new System.EventHandler(this.tsmiMarkAsCorner_Click);
             // 
             // tsmiFailTEMS
             // 
             this.tsmiFailTEMS.Name = "tsmiFailTEMS";
-            this.tsmiFailTEMS.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFailTEMS.Size = new System.Drawing.Size(156, 22);
             this.tsmiFailTEMS.Tag = "Fail";
             this.tsmiFailTEMS.Text = "Fail TEMS";
             this.tsmiFailTEMS.Click += new System.EventHandler(this.tsmiFailTEMS_Click);
@@ -77,7 +78,7 @@ namespace CSAM_Manual
             // tsmiPassTEMS
             // 
             this.tsmiPassTEMS.Name = "tsmiPassTEMS";
-            this.tsmiPassTEMS.Size = new System.Drawing.Size(180, 22);
+            this.tsmiPassTEMS.Size = new System.Drawing.Size(156, 22);
             this.tsmiPassTEMS.Tag = "Pass";
             this.tsmiPassTEMS.Text = "Pass TEMS";
             this.tsmiPassTEMS.Click += new System.EventHandler(this.tsmiPassTEMS_Click);
@@ -85,7 +86,7 @@ namespace CSAM_Manual
             // tsmiResetTEMS
             // 
             this.tsmiResetTEMS.Name = "tsmiResetTEMS";
-            this.tsmiResetTEMS.Size = new System.Drawing.Size(180, 22);
+            this.tsmiResetTEMS.Size = new System.Drawing.Size(156, 22);
             this.tsmiResetTEMS.Tag = "NA";
             this.tsmiResetTEMS.Text = "Reset TEMS";
             this.tsmiResetTEMS.Click += new System.EventHandler(this.tsmiResetTEMS_Click);

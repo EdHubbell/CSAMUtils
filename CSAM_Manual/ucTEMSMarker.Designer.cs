@@ -36,10 +36,12 @@ namespace CSAM_Manual
             this.tpBH = new System.Windows.Forms.TabPage();
             this.pibBH = new CSAM_Manual.ucPanelImageBox();
             this.pnlRight = new System.Windows.Forms.Panel();
+            this.btnSavePanelState = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpTH.SuspendLayout();
             this.tpBH.SuspendLayout();
+            this.pnlRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -113,11 +115,22 @@ namespace CSAM_Manual
             // 
             // pnlRight
             // 
+            this.pnlRight.Controls.Add(this.btnSavePanelState);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRight.Location = new System.Drawing.Point(341, 43);
             this.pnlRight.Name = "pnlRight";
             this.pnlRight.Size = new System.Drawing.Size(194, 248);
             this.pnlRight.TabIndex = 1;
+            // 
+            // btnSavePanelState
+            // 
+            this.btnSavePanelState.Location = new System.Drawing.Point(3, 144);
+            this.btnSavePanelState.Name = "btnSavePanelState";
+            this.btnSavePanelState.Size = new System.Drawing.Size(188, 23);
+            this.btnSavePanelState.TabIndex = 0;
+            this.btnSavePanelState.Text = "Save Panel State";
+            this.btnSavePanelState.UseVisualStyleBackColor = true;
+            this.btnSavePanelState.Click += new System.EventHandler(this.btnSavePanelState_Click);
             // 
             // ucTEMSMarker
             // 
@@ -130,6 +143,7 @@ namespace CSAM_Manual
             this.tabControl1.ResumeLayout(false);
             this.tpTH.ResumeLayout(false);
             this.tpBH.ResumeLayout(false);
+            this.pnlRight.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -143,5 +157,6 @@ namespace CSAM_Manual
         private ucPanelImageBox pibTH;
         private ucPanelImageBox pibBH;
         private System.Windows.Forms.Panel pnlRight;
+        private System.Windows.Forms.Button btnSavePanelState;
     }
 }

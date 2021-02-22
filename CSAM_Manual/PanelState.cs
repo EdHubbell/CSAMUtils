@@ -123,6 +123,21 @@ namespace CSAM_Manual
             DeviceIndex = deviceIndex;
 
         }
+
+        public void SetInspectionState(PanelImageSides imageSide, TEMS_InspectionStates inspectionState)
+        {
+            if (imageSide == PanelImageSides.TH) TH_InspectionState = inspectionState;
+            if (imageSide == PanelImageSides.BH) BH_InspectionState = inspectionState;
+        }
+        public TEMS_InspectionStates GetInspectionState(PanelImageSides imageSide)
+        {
+            if (imageSide == PanelImageSides.TH) return TH_InspectionState;
+            if (imageSide == PanelImageSides.BH) return BH_InspectionState;
+            return TEMS_InspectionStates.NA;
+        }
+
+
+
     }
 
 }
