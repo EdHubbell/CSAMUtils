@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSAMUtils_UnitTests", "CSAM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSAM_Manual", "CSAM_ManualLabeler\CSAM_Manual.csproj", "{833FA211-A994-48F9-B18B-73B92D0B3039}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSAMCommon", "CSAMCommon\CSAMCommon.csproj", "{8C90FEC9-1779-491D-9DB7-2C2B580766E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{833FA211-A994-48F9-B18B-73B92D0B3039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{833FA211-A994-48F9-B18B-73B92D0B3039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{833FA211-A994-48F9-B18B-73B92D0B3039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C90FEC9-1779-491D-9DB7-2C2B580766E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C90FEC9-1779-491D-9DB7-2C2B580766E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C90FEC9-1779-491D-9DB7-2C2B580766E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C90FEC9-1779-491D-9DB7-2C2B580766E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

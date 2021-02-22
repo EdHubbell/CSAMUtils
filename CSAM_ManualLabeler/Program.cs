@@ -34,6 +34,7 @@ namespace CSAM_Manual
             }
             catch
             {
+                // I don't think missing the file will actually cause this error. 
                 MessageBox.Show("Missing NLog.config file. This software can't run without an NLog.config file.");
                 Application.Exit();
             }
@@ -42,6 +43,7 @@ namespace CSAM_Manual
 
             try
             {
+
 
                 logger.Info("Program.cs Main - Application launch");
 
